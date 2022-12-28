@@ -23,6 +23,7 @@ const checkFileExist = async (filePath) => {
 
             checkFileExist('README.md')
             checkFileExist('Dockerfile')
+            checkFileExist(`${__dirname}/config/files.json`)
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
             //console.log(`Hello ${nameToGreet}!`);
