@@ -1,16 +1,14 @@
-{
-    "repositories": [
-        {
-            "name": "Hello-World-One",
-            "url": "https://github.com/octocat/Hello-World.git",
-            "branch": "main",
-            "docker_file_path": "Dockerfile"
-        },
-        {
-            "name": "Hello-World-One",
-            "url": "https://github.com/octocat/Hello-World.git",
-            "branch": "main",
-            "docker_file_path": "Dockerfile"
-        }
-    ]
-}
+[
+    {
+        "name": "Hello-World-One",
+        "url": "https://github.com/octocat/Hello-World.git",
+        "branch": "main",
+        "docker_file_path": "Dockerfile"
+    },
+    {
+        "name": "Hello-World-One",
+        "url": "https://github.com/octocat/Hello-World.git",
+        "branch": "main",
+        "docker_file_path": "Dockerfile"
+    }
+]

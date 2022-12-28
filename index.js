@@ -30,10 +30,16 @@ const openJsonFile = (filePath) => {
             console.log(`Filename is ${__filename}`);
             console.log(`Directory name is ${__dirname}`);
 
-            const data = openJsonFile(`${__dirname}/config/files.json`)
-            for(const file of data.files) {
+            const requireConfigFilesData = openJsonFile(`${__dirname}/config/files.json`)
+            for(const file of requireConfigFilesData) {
                 checkFileExist(file)
             }
+
+            const localRepositoriesConfigData = openJsonFile(`${__dirname}/config/repositories.json`)
+            const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
+
+            const obj = Object.assign(localRepositoriesConfigData, currentRepositoriesConfigData)
+            console.log(obj)
 
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');

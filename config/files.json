@@ -1,7 +1,5 @@
-{
-    "files": [
-        "README.md",
-        "Dockerfile",
-        "github_action_config.json"
-    ]
-}
+[
+    "README.md",
+    "Dockerfile",
+    "github_action_config.json"
+]
