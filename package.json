@@ -1,0 +1,26 @@
+{
+  "name": "build-enviroment-action",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Maximo-Miranda/build-enviroment-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Maximo-Miranda/build-enviroment-action/issues"
+  },
+  "homepage": "https://github.com/Maximo-Miranda/build-enviroment-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "install": "^0.13.0",
+    "npm": "^9.2.0"
+  }
+}
