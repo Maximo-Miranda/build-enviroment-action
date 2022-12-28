@@ -16,7 +16,8 @@ const checkFileExist = async (filePath) => {
 (
     async () => {
         try {
-            core.notice('Calling Deuna Test Enviroment Action')
+            core.notice('=> Calling Deuna Test Enviroment Action')
+            console.log(`=> Current path: ${path.dirname(__filename)}`);
 
             checkFileExist('README.md')
             checkFileExist('Dockerfile')

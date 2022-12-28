@@ -1,0 +1,6 @@
+{
+    "files": [
+        "Dockerfile",
+        "github_action_config.json"
+    ]
+}
