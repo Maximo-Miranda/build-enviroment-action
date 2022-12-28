@@ -23,6 +23,16 @@ const openJsonFile = (filePath) => {
     }
 }
 
+const mergeJsonArrayByKeyCondition = (first, second, key) => {
+    return first.map((item) => {
+        const secondItem = second.find((secondItem) => secondItem[key] === item[key])
+        return {
+            ...item,
+            ...secondItem
+        }
+    })
+}
+
 (
     async () => {
         try {
@@ -38,7 +48,7 @@ const openJsonFile = (filePath) => {
             const localRepositoriesConfigData = openJsonFile(`${__dirname}/config/repositories.json`)
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
 
-            const obj = Object.assign(localRepositoriesConfigData, currentRepositoriesConfigData)
+            const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')            
             console.log(obj)
 
             // `who-to-greet` input defined in action metadata file
