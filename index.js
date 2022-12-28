@@ -13,6 +13,16 @@ const checkFileExist = async (filePath) => {
     }
 }
 
+const openJsonFile = (filePath) => {
+    try {
+        const data = fs.readFileSync(filePath)
+        return JSON.parse(data)
+    } catch (error) {
+        core.setFailed(`File ${filePath} does not exist`)
+        return false
+    }
+}
+
 (
     async () => {
         try {
@@ -20,9 +30,11 @@ const checkFileExist = async (filePath) => {
             console.log(`Filename is ${__filename}`);
             console.log(`Directory name is ${__dirname}`);
 
-            checkFileExist('README.md')
-            checkFileExist('Dockerfile')
-            checkFileExist(`${__dirname}/config/files.json`)
+            const data = openJsonFile(`${__dirname}/config/files.json`)
+            for(const file of data.files) {
+                checkFileExist(file)
+            }
+
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
             //console.log(`Hello ${nameToGreet}!`);
