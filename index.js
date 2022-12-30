@@ -23,15 +23,7 @@ const openJsonFile = (filePath) => {
     }
 }
 
-const mergeJsonArrayByKeyCondition = (first, second, key) => {
-    return first.map((item) => {
-        const secondItem = second.find((secondItem) => secondItem[key] !== item[key])
-        return {
-            ...item,
-            ...secondItem
-        }
-    })
-}
+const mergeJsonArrayByKeyCondition = (first, second, key) => first.map((item) => second.find((secondItem) => secondItem[key] !== item[key])
 
 (
     async () => {
