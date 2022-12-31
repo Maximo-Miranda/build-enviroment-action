@@ -1,6 +1,7 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
 const fs = require( 'fs' )
+const _ = require('lodash');
 
 const checkFileExist = async (filePath) => {
     try {
@@ -23,9 +24,9 @@ const openJsonFile = (filePath) => {
     }
 }
 
+// Merge arrays by keys condition ...
 const mergeJsonArrayByKeyCondition = (first, second, key) => {
-    return first.map((item) => second.find((secondItem) => secondItem[key] === item[key]))
-    //return first.map((item) => second.find((secondItem) => secondItem[key] !== item[key]))
+    return _.difference(first, second)
 }
 
 (
