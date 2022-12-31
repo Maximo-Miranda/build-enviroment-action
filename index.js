@@ -28,9 +28,10 @@ const openJsonFile = (filePath) => {
 const mergeJsonArrayByKeyCondition = (first, second, key) => {
     console.log("first", first)
     console.log("second", second)
-    const result = _.differenceWith(first, second, _.isEqual)
-    console.log("result", result)
-    return result
+    const tmpJoin = _.join(first, second)
+    //const result = _.differenceWith(first, second, _.isEqual)
+    console.log("result", tmpJoin)
+    return tmpJoin
 }
 
 (
