@@ -51,7 +51,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
 
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')            
-            console.log(obj)
+            //console.log(obj)
 
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
