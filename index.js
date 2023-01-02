@@ -1,7 +1,8 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
-const fs = require( 'fs' )
-const _ = require('lodash');
+const fs = require('fs')
+const _ = require('lodash')
+const shell = require('shelljs')
 
 const checkFileExist = async (filePath) => {
     try {
@@ -32,7 +33,12 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
     const tmpSortedUniq = _.uniqWith(tmpConcat, _.isEqual)
     //const result = _.differenceWith(first, second, _.isEqual)
     console.log("result", tmpSortedUniq)
-    console.log("unique", _.uniq([2, 1, 2]))
+    if (!shell.which('git')) {
+        shell.echo('Sorry, this script requires git');
+        shell.exit(1);
+    } else {
+        shell.echo('We have git installed');
+    }
     return tmpSortedUniq
 }
 
@@ -44,14 +50,14 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             console.log(`Directory name is ${__dirname}`);
 
             const requireConfigFilesData = openJsonFile(`${__dirname}/config/files.json`)
-            for(const file of requireConfigFilesData) {
+            for (const file of requireConfigFilesData) {
                 checkFileExist(file)
             }
 
             const localRepositoriesConfigData = openJsonFile(`${__dirname}/config/repositories.json`)
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
 
-            const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')            
+            const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
             //console.log(obj)
 
             // `who-to-greet` input defined in action metadata file
@@ -62,9 +68,9 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             //// Get the JSON webhook payload for the event that triggered the workflow
             //const payload = JSON.stringify(github.context.payload, undefined, 2)
             //console.log(`The event payload: ${payload}`);
-          } catch (error) {
+        } catch (error) {
             core.setFailed(error.message)
-          }
+        }
     }
 
 )()
