@@ -32,6 +32,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
     const tmpSortedUniq = _.sortedUniq(tmpConcat)
     //const result = _.differenceWith(first, second, _.isEqual)
     console.log("result", tmpSortedUniq)
+    console.log("unique", _.uniq([2, 1, 2]))
     return tmpSortedUniq
 }
 
