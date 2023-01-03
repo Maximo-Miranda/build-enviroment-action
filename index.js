@@ -72,12 +72,9 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const localRepositoriesConfigData = openJsonFile(`${__dirname}/config/repositories.json`)
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
             
+            //TODO: validate when the file is empty, the local repository file change the branch
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
-            console.log("=> obj.length", obj.length, "=> localRepositoriesConfigData.length", localRepositoriesConfigData.length, "=> currentRepositoriesConfigData.length", currentRepositoriesConfigData.length)
-            if(obj.length == (localRepositoriesConfigData.length + currentRepositoriesConfigData.length)) obj = currentRepositoriesConfigData
-
-            console.log("=> obj.length", obj.length)
-            console.log("=> obj", obj)
+            
             for (const repository of obj) {
                 cloneRepository(repository.url, repository.branch, repository.name)
             }
