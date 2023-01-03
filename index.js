@@ -30,7 +30,8 @@ const cloneRepository = async (url, branch) => {
     try {
         const response = shell.exec(`git clone ${url} -b ${branch}`)
         if(response.code !== 0){
-            throw new Error(`${response.error()}`)
+            console.log("response", response)
+            throw new Error(`${response}`)
         }
         return true
     } catch (error) {
