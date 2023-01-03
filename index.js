@@ -30,10 +30,10 @@ const openJsonFile = (filePath) => {
 // cloneRepository ...
 const cloneRepository = (url, branch) => {
     try {
-        console.log(shell.ls('-A'))
+        console.log(shell.pwd())
         const response = shell.exec(`git clone ${url} -b ${branch}`)
         if (response.code !== 0) {
-            throw new Error(` ${response.stderr.replaceAll('\n', '')}`)
+            throw new Error(`${response.stderr.replaceAll('\n', '')}`)
         }
     } catch (error) {
         throw error
