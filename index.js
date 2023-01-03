@@ -30,13 +30,10 @@ const cloneRepository = async (url, branch) => {
     try {
         const response = shell.exec(`git clone ${url} -b ${branch}`)
         if(response.code !== 0){
-            console.log("response", response)
-            throw new Error(`${response}`)
+            throw new Error(`${response.stderr}`)
         }
-        return true
     } catch (error) {
-        core.setFailed(`Error cloning repository ${url} - ${error.message}`)
-        return false
+      throw error
     }
 }
 
@@ -72,9 +69,10 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
             
             for (const repository of obj) {
-                if(!await cloneRepository(repository.url, repository.branch)){
+                await cloneRepository(repository.url, repository.branch)
+                /* if(!await cloneRepository(repository.url, repository.branch)){
                     break
-                }
+                } */
             }
 
             console.log('llego')
