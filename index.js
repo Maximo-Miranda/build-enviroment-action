@@ -32,6 +32,7 @@ const cloneRepository = (url, branch) => {
         if(response.code !== 0){
             throw new Error(`${response.error()}`)
         }
+        return true
     } catch (error) {
         core.setFailed(`Error cloning repository ${url} - ${error.message}`)
         return false
@@ -70,8 +71,12 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
             
             for (const repository of obj) {
-                cloneRepository(repository.url, repository.branch)
+                if(!cloneRepository(repository.url, repository.branch)){
+                    break
+                }
             }
+
+            console.log('llego')
 
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
