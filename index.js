@@ -89,7 +89,7 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
             //TODO: validate when the file is empty, the local repository file change the branch
             //Warning: this implementation only support when currentRepositoriesConfigData has one element change the branch
             //for more of one elment is not supported
-            const obj = mergeJsonArrayByKeyCondition(currentRepositoriesConfigData, localRepositoriesConfigData)
+            const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData)
 
             console.log("obj", obj)
 
