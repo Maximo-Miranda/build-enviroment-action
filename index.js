@@ -71,7 +71,9 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
 
             const localRepositoriesConfigData = openJsonFile(`${__dirname}/config/repositories.json`)
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
-            const obj = localRepositoriesConfigData.length == currentRepositoriesConfigData.length ? currentRepositoriesConfigData : mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
+            
+            const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
+            if(obj.length == (localRepositoriesConfigData.length + currentRepositoriesConfigData.length)) obj = currentRepositoriesConfigData
 
             console.log("=> obj.length", obj.length)
             console.log("=> obj", obj)
