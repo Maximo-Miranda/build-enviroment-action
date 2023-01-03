@@ -93,6 +93,8 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             //Warning: this implementation only support when currentRepositoriesConfigData has one element change the branch
             //for more of one elment is not supported
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
+
+            console.log("obj", obj)
             
             for (const repository of obj) {
                 cloneRepository(repository.url, repository.branch, repository.name)
