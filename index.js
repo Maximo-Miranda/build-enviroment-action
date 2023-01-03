@@ -4,6 +4,7 @@ const fs = require('fs')
 const _ = require('lodash')
 const shell = require('shelljs')
 
+// checkFileExist ...
 const checkFileExist = async (filePath) => {
     try {
         await fs.promises.access(filePath)
@@ -15,6 +16,7 @@ const checkFileExist = async (filePath) => {
     }
 }
 
+// openJsonFile ...
 const openJsonFile = (filePath) => {
     try {
         const data = fs.readFileSync(filePath)
@@ -28,10 +30,10 @@ const openJsonFile = (filePath) => {
 // cloneRepository ...
 const cloneRepository = (url, branch) => {
     try {
+        console.log(shell.ls('-A'))
         const response = shell.exec(`git clone ${url} -b ${branch}`)
         if (response.code !== 0) {
-            console.log(response)
-            throw new Error(`${ response.stderr.replaceAll('\n', '')}`)
+            throw new Error(` ${response.stderr.replaceAll('\n', '')}`)
         }
     } catch (error) {
         throw error
@@ -42,13 +44,6 @@ const cloneRepository = (url, branch) => {
 const mergeJsonArrayByKeyCondition = (first, second, key) => {
     const tmpConcat = _.concat(first, second)
     const tmpSortedUniq = _.uniqWith(tmpConcat, _.isEqual)
-
-    /* if (!shell.which('git')) {
-        shell.echo('Sorry, this script requires git');
-        shell.exit(1);
-    } else {
-        shell.echo('We have git installed');
-    } */
 
     return tmpSortedUniq
 }
@@ -83,6 +78,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             //// Get the JSON webhook payload for the event that triggered the workflow
             //const payload = JSON.stringify(github.context.payload, undefined, 2)
             //console.log(`The event payload: ${payload}`);
+
         } catch (error) {
             core.setFailed(error.message)
         }
