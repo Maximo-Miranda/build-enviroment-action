@@ -28,10 +28,10 @@ const openJsonFile = (filePath) => {
 }
 
 // cloneRepository ...
-const cloneRepository = (url, branch) => {
+const cloneRepository = (url, branch, name) => {
     try {
         console.log(shell.pwd())
-        const response = shell.exec(`git clone ${url} -b ${branch}`)
+        const response = shell.exec(`git clone ${url} ${name} -b ${branch}`)
         if (response.code !== 0) {
             throw new Error(`${response.stderr.replaceAll('\n', '')}`)
         }
@@ -65,7 +65,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
 
             for (const repository of obj) {
-                cloneRepository(repository.url, repository.branch)
+                cloneRepository(repository.url, repository.branch, repository.name)
             }
 
             console.log('llego')
