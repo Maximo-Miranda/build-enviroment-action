@@ -51,13 +51,12 @@ const cloneRepository = (url, branch, name) => {
 }
 
 // Merge arrays by keys condition ...
-const mergeJsonArrayByKeyCondition = (first, second, key) => {
+const mergeJsonArrayByKeyCondition = (from, to, key) => {
 
     const tmp = []
 
-    for (const element of second) {
-        const find = _.findIndex(first, (o) => _.isEqual(o, element))
-        console.log("find", find)
+    for (const element of to) {
+        const find = _.findIndex(from, (o) => _.isEqual(o, element))
         if (find >= 0) {
             tmp.push(second[find])
         } else {
@@ -90,7 +89,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             //TODO: validate when the file is empty, the local repository file change the branch
             //Warning: this implementation only support when currentRepositoriesConfigData has one element change the branch
             //for more of one elment is not supported
-            const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
+            const obj = mergeJsonArrayByKeyCondition(currentRepositoriesConfigData, localRepositoriesConfigData)
 
             console.log("obj", obj)
 
