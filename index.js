@@ -31,7 +31,7 @@ const cloneRepository = (url, branch) => {
         const response = shell.exec(`git clone ${url} -b ${branch}`)
         if (response.code !== 0) {
             console.log(response)
-            throw new Error(`${ response.stderr.replace('\n', '')}`)
+            throw new Error(`${ response.stderr.replaceAll('\n', '')}`)
         }
     } catch (error) {
         throw error
