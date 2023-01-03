@@ -28,7 +28,10 @@ const openJsonFile = (filePath) => {
 // cloneRepository ...
 const cloneRepository = (url, branch) => {
     try {
-        shell.exec(`git clone ${url} -b ${branch}`)
+        const response = shell.exec(`git clone ${url} -b ${branch}`)
+        if(response.code !== 0){
+            throw new Error(`${response.error()}`)
+        }
     } catch (error) {
         core.setFailed(`Error cloning repository ${url} - ${error.message}`)
         return false
