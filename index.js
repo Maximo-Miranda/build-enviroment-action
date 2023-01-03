@@ -18,7 +18,7 @@ const checkFileExist = async (filePath) => {
 // checkExistPath ...
 const checkExistPath = async (path) => {
     try {
-        if(await fs.promises.existsSync(path)){
+        if (await fs.promises.existsSync(path)) {
             return true
         }
         return false
@@ -56,14 +56,11 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
     const tmp = []
 
     for (const element of first) {
-        for(const element2 of second){
-            if(element['url'] === element2['url']){
-                if(element2['branch'] !== element['branch']){
-                    tmp.push(element2)
-                } else {
-                    tmp.push(element)
-                }
-            }
+        const find = _.findIndex(second, { "url": element.url, "branch": element.branch })
+        if (find >= 0) {
+            tmp.push(element)
+        } else {
+            tmp.push(second[find])
         }
     }
 
@@ -71,7 +68,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
 
     //const tmpConcat = _.concat(first, second)
     //const tmpSortedUniq = _.uniqWith(tmpConcat, _.isEqual)
-//
+    //
     //return tmpSortedUniq
 }
 
@@ -88,14 +85,14 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
 
             const localRepositoriesConfigData = openJsonFile(`${__dirname}/config/repositories.json`)
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
-            
+
             //TODO: validate when the file is empty, the local repository file change the branch
             //Warning: this implementation only support when currentRepositoriesConfigData has one element change the branch
             //for more of one elment is not supported
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
 
             console.log("obj", obj)
-            
+
             for (const repository of obj) {
                 cloneRepository(repository.url, repository.branch, repository.name)
             }
