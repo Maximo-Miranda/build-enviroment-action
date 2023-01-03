@@ -25,26 +25,30 @@ const openJsonFile = (filePath) => {
     }
 }
 
+// cloneRepository ...
+const cloneRepository = (url, branch) => {
+    shell.exec(`git clone ${url} -b ${branch}`)
+}
+
 // Merge arrays by keys condition ...
 const mergeJsonArrayByKeyCondition = (first, second, key) => {
-    console.log("first", first)
-    console.log("second", second)
     const tmpConcat = _.concat(first, second)
     const tmpSortedUniq = _.uniqWith(tmpConcat, _.isEqual)
-    //const result = _.differenceWith(first, second, _.isEqual)
-    console.log("result", tmpSortedUniq)
-    if (!shell.which('git')) {
+    
+    /* if (!shell.which('git')) {
         shell.echo('Sorry, this script requires git');
         shell.exit(1);
     } else {
         shell.echo('We have git installed');
-    }
+    } */
+
     return tmpSortedUniq
 }
 
 (
     async () => {
         try {
+
             core.notice('=> Calling Deuna Test Enviroment Action')
             console.log(`Filename is ${__filename}`);
             console.log(`Directory name is ${__dirname}`);
@@ -58,7 +62,10 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
 
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
-            //console.log(obj)
+            
+            for (const repository of obj) {
+                cloneRepository(repository.url, repository.branch)
+            }
 
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
