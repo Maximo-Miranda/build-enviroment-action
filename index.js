@@ -57,6 +57,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
 
     for (const element of first) {
         const find = _.findIndex(second, (o) => _.isEqual(o, element))
+        console.log("find", find)
         if (find >= 0) {
             tmp.push(element)
         } else {
