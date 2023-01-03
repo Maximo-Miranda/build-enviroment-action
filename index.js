@@ -73,6 +73,8 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
             
             //TODO: validate when the file is empty, the local repository file change the branch
+            //Warning: this implementation only support when currentRepositoriesConfigData has one element change the branch
+            //for more of one elment is not supported
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
             
             for (const repository of obj) {
