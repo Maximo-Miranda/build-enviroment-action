@@ -27,7 +27,12 @@ const openJsonFile = (filePath) => {
 
 // cloneRepository ...
 const cloneRepository = (url, branch) => {
-    shell.exec(`git clone ${url} -b ${branch}`)
+    try {
+        shell.exec(`git clone ${url} -b ${branch}`)
+    } catch (error) {
+        core.setFailed(`Error cloning repository ${url} - ${error.message}`)
+        return false
+    }
 }
 
 // Merge arrays by keys condition ...
@@ -50,8 +55,6 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
         try {
 
             core.notice('=> Calling Deuna Test Enviroment Action')
-            console.log(`Filename is ${__filename}`);
-            console.log(`Directory name is ${__dirname}`);
 
             const requireConfigFilesData = openJsonFile(`${__dirname}/config/files.json`)
             for (const file of requireConfigFilesData) {
