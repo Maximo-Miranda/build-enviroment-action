@@ -12,7 +12,7 @@
         "docker_file_path": "Dockerfile"
     },
     {
-        "name": "deuna-merchant-auth",
+        "name": "deuna-auth",
         "url": "https://github.com/octocat/Hello-World.git",
         "branch": "master",
         "docker_file_path": "Dockerfile"
