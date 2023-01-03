@@ -11,8 +11,19 @@ const checkFileExist = async (filePath) => {
         core.notice(`File ${filePath} exists`)
         return true
     } catch (error) {
-        core.setFailed(`File ${filePath} does not exist`)
+        throw new Error(`File ${filePath} does not exist`)
+    }
+}
+
+// checkExistPath ...
+const checkExistPath = async (path) => {
+    try {
+        if(await fs.promises.existsSync(path)){
+            return true
+        }
         return false
+    } catch (error) {
+        throw error
     }
 }
 
@@ -22,8 +33,7 @@ const openJsonFile = (filePath) => {
         const data = fs.readFileSync(filePath)
         return JSON.parse(data)
     } catch (error) {
-        core.setFailed(`File ${filePath} does not exist`)
-        return false
+        throw error
     }
 }
 

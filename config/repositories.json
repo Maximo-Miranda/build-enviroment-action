@@ -2,31 +2,31 @@
     {
         "name": "deuna-apigw",
         "url": "https://github.com/octocat/Hello-World.git",
-        "branch": "master",
+        "branch": "main",
         "docker_file_path": "Dockerfile"
     },
     {
         "name": "deuna-user-auth",
         "url": "https://github.com/octocat/Hello-World.git",
-        "branch": "master",
+        "branch": "main",
         "docker_file_path": "Dockerfile"
     },
     {
         "name": "deuna-merchant-auth",
         "url": "https://github.com/octocat/Hello-World.git",
-        "branch": "master",
+        "branch": "main",
         "docker_file_path": "Dockerfile"
     },
     {
         "name": "deuna-merchant-auth",
         "url": "https://github.com/octocat/Hello-World.git",
-        "branch": "master",
+        "branch": "main",
         "docker_file_path": "Dockerfile"
     },
     {
         "name": "deuna-payments",
         "url": "https://github.com/octocat/Hello-World.git",
-        "branch": "master",
+        "branch": "main",
         "docker_file_path": "Dockerfile"
     }
 ]
