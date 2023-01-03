@@ -29,11 +29,12 @@ const openJsonFile = (filePath) => {
 const cloneRepository = async (url, branch) => {
     try {
         const response = shell.exec(`git clone ${url} -b ${branch}`)
-        if(response.code !== 0){
+        if (response.code !== 0) {
             throw new Error(`${response.stderr}`)
         }
     } catch (error) {
-      throw error
+        console.log("error", error)
+        throw error.message
     }
 }
 
@@ -41,7 +42,7 @@ const cloneRepository = async (url, branch) => {
 const mergeJsonArrayByKeyCondition = (first, second, key) => {
     const tmpConcat = _.concat(first, second)
     const tmpSortedUniq = _.uniqWith(tmpConcat, _.isEqual)
-    
+
     /* if (!shell.which('git')) {
         shell.echo('Sorry, this script requires git');
         shell.exit(1);
@@ -67,7 +68,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
 
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
-            
+
             for (const repository of obj) {
                 await cloneRepository(repository.url, repository.branch)
                 /* if(!await cloneRepository(repository.url, repository.branch)){
