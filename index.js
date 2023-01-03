@@ -52,10 +52,27 @@ const cloneRepository = (url, branch, name) => {
 
 // Merge arrays by keys condition ...
 const mergeJsonArrayByKeyCondition = (first, second, key) => {
-    const tmpConcat = _.concat(first, second)
-    const tmpSortedUniq = _.uniqWith(tmpConcat, _.isEqual)
 
-    return tmpSortedUniq
+    const tmp = []
+
+    for (const element of first) {
+        for(const element2 of second){
+            if(element['url'] === element2['url']){
+                if(element2['branch'] !== element['branch']){
+                    tmp.push(element2)
+                } else {
+                    tmp.push(element)
+                }
+            }
+        }
+    }
+
+    return tmp
+
+    //const tmpConcat = _.concat(first, second)
+    //const tmpSortedUniq = _.uniqWith(tmpConcat, _.isEqual)
+//
+    //return tmpSortedUniq
 }
 
 (
