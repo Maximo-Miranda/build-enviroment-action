@@ -26,7 +26,7 @@ const openJsonFile = (filePath) => {
 }
 
 // cloneRepository ...
-const cloneRepository = (url, branch) => {
+const cloneRepository = async (url, branch) => {
     try {
         const response = shell.exec(`git clone ${url} -b ${branch}`)
         if(response.code !== 0){
@@ -71,7 +71,7 @@ const mergeJsonArrayByKeyCondition = (first, second, key) => {
             const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData, 'url')
             
             for (const repository of obj) {
-                if(!cloneRepository(repository.url, repository.branch)){
+                if(!await cloneRepository(repository.url, repository.branch)){
                     break
                 }
             }
