@@ -42,6 +42,7 @@ const openJsonFile = (filePath) => {
 const cloneRepository = (url, branch, name) => {
     try {
         //console.log(shell.pwd())
+        console.log("=> init clone repository", url, branch)
         const response = shell.exec(`git clone ${url} ${name} -b ${branch}`)
         if (response.code !== 0) {
             throw new Error(`${response.stderr.replaceAll('\n', '')}`)
@@ -74,17 +75,20 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
 }
 
 
-const makeGithubUrl = (url) => {
-
+const makeGithubUrl = (url, username, token) => {
+    const urlParse = GitUrlParse(url)
+    return `https://${username}:${token}@${urlParse.resource}/${urlParse.pathname}`
 }
 
 (
     async () => {
         try {
 
+            const payload = JSON.stringify(github.context.payload, undefined, 2)
+
             const GITHUB_TOKEN = process.env.PERSONAL_TOKEN
             const DEUNA_ACTION_ENVIRONMENT = process.env.DEUNA_ACTION_ENVIRONMENT
-            let USERNAME = ''
+            let USERNAME = payload.pusher.name
 
             core.notice('=> Calling Deuna Test Enviroment Action')
 
@@ -105,7 +109,8 @@ const makeGithubUrl = (url) => {
             console.log("obj", repositories)
 
             for (const repository of repositories) {
-                cloneRepository(repository.url, repository.branch, repository.name)
+                const url = makeGithubUrl(repository.url, USERNAME, GITHUB_TOKEN)                
+                cloneRepository(url, repository.branch, repository.name)
             }
 
 
@@ -121,8 +126,7 @@ const makeGithubUrl = (url) => {
             //const time = (new Date()).toTimeString();
             //core.setOutput("time", time);
             //// Get the JSON webhook payload for the event that triggered the workflow
-            const payload = JSON.stringify(github.context.payload, undefined, 2)
-            console.log(`The event payload: ${payload}`);
+            
 
         } catch (error) {
             core.setFailed(error.message)
