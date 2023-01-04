@@ -95,7 +95,7 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
             console.log("obj", obj)
 
             console.log('llego', process.env.GITHUB_TOKEN)
-            
+
             for (const repository of obj) {
                 cloneRepository(repository.url, repository.branch, repository.name)
             }
@@ -112,8 +112,8 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
             //const time = (new Date()).toTimeString();
             //core.setOutput("time", time);
             //// Get the JSON webhook payload for the event that triggered the workflow
-            //const payload = JSON.stringify(github.context.payload, undefined, 2)
-            //console.log(`The event payload: ${payload}`);
+            const payload = JSON.stringify(github.context.payload, undefined, 2)
+            console.log(`The event payload: ${payload}`);
 
         } catch (error) {
             core.setFailed(error.message)
