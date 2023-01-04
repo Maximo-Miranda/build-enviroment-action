@@ -94,11 +94,12 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
 
             console.log("obj", obj)
 
+            console.log('llego', process.env.GITHUB_TOKEN)
+            
             for (const repository of obj) {
                 cloneRepository(repository.url, repository.branch, repository.name)
             }
 
-            console.log('llego', process.env.GITHUB_TOKEN)
 
             if (shell.which('docker-compose')) {
                 shell.echo('Sorry, this script requires docker');
