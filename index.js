@@ -99,7 +99,7 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
 
             console.log('llego')
 
-            if (shell.which('docker')) {
+            if (shell.which('docker-compose')) {
                 shell.echo('Sorry, this script requires docker');
                 shell.exit(0);
             }
