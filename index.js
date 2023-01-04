@@ -98,7 +98,7 @@ const makeGithubUrl = (url) => {
 
             const repositories = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData)
 
-            if(obj.length === 0) {
+            if(repositories.length === 0) {
                 throw new Error('No repositories to clone')
             }
 
