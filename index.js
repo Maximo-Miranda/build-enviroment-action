@@ -72,6 +72,8 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
     //return tmpSortedUniq
 }
 
+
+
 (
     async () => {
         try {
@@ -95,7 +97,7 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
             console.log("obj", obj)
 
             console.log('=> llego', core.getInput('repo-token'), process.env.GITHUB_TOKEN)
-            console.log('=> llego 2', core.getInput('personal-token'))
+            console.log('=> llego 2', process.env.PERSONAL_TOKEN)
 
             for (const repository of obj) {
                 cloneRepository(repository.url, repository.branch, repository.name)
