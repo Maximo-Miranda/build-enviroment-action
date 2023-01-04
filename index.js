@@ -99,6 +99,11 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
 
             console.log('llego')
 
+            if (shell.which('docker')) {
+                shell.echo('Sorry, this script requires docker');
+                shell.exit(0);
+            }
+
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
             //console.log(`Hello ${nameToGreet}!`);
