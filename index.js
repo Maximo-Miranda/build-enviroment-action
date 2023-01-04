@@ -67,11 +67,6 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
     }
 
     return tmp
-
-    //const tmpConcat = _.concat(first, second)
-    //const tmpSortedUniq = _.uniqWith(tmpConcat, _.isEqual)
-    //
-    //return tmpSortedUniq
 }
 
 
