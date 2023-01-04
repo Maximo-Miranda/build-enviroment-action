@@ -94,7 +94,7 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
 
             console.log("obj", obj)
 
-            console.log('llego', core.getInput('repo-token'))
+            console.log('llego', core.getInput('DUNA_ACTION_TOKEN'))
 
             for (const repository of obj) {
                 cloneRepository(repository.url, repository.branch, repository.name)
