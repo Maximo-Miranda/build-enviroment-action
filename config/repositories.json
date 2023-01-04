@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "name": "deuna-apigw",
+        "url": "https://github.com/octocat/Hello-World.git",
+        "branch": "master",
+        "docker_file_path": "Dockerfile"
+    },
+    {
+        "name": "deuna-user-auth",
+        "url": "https://github.com/octocat/Hello-World.git",
+        "branch": "master",
+        "docker_file_path": "Dockerfile"
+    }
+]
