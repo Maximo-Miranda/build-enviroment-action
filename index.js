@@ -103,7 +103,7 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
 
             if (shell.which('docker-compose')) {
                 shell.echo('Sorry, this script requires docker');
-                shell.exit(0);
+                //shell.exit(0);
             }
 
             // `who-to-greet` input defined in action metadata file
