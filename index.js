@@ -3,6 +3,7 @@ const github = require('@actions/github')
 const fs = require('fs')
 const _ = require('lodash')
 const shell = require('shelljs')
+const GitUrlParse = require("git-url-parse");
 
 // checkFileExist ...
 const checkFileExist = async (filePath) => {
@@ -73,10 +74,17 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
 }
 
 
+const makeGithubUrl = (url) => {
+
+}
 
 (
     async () => {
         try {
+
+            const GITHUB_TOKEN = process.env.PERSONAL_TOKEN
+            const DEUNA_ACTION_ENVIRONMENT = process.env.DEUNA_ACTION_ENVIRONMENT
+            let USERNAME = ''
 
             core.notice('=> Calling Deuna Test Enviroment Action')
 
@@ -88,25 +96,23 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
             const localRepositoriesConfigData = openJsonFile(`${__dirname}/config/repositories.json`)
             const currentRepositoriesConfigData = openJsonFile('github_action_config.json')
 
-            const obj = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData)
+            const repositories = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData)
 
             if(obj.length === 0) {
                 throw new Error('No repositories to clone')
             }
 
-            console.log("obj", obj)
+            console.log("obj", repositories)
 
-            console.log('=> llego', core.getInput('repo-token'), process.env.GITHUB_TOKEN)
-            console.log('=> llego 2', process.env.PERSONAL_TOKEN)
-
-            for (const repository of obj) {
+            for (const repository of repositories) {
                 cloneRepository(repository.url, repository.branch, repository.name)
             }
 
 
             if (shell.which('docker-compose')) {
-                shell.echo('Sorry, this script requires docker');
-                //shell.exit(0);
+                shell.echo('Docker Compose is installed');
+            } else {
+                shell.echo('Docker Compose is not installed');
             }
 
             // `who-to-greet` input defined in action metadata file
@@ -115,8 +121,8 @@ const mergeJsonArrayByKeyCondition = (from, to, key) => {
             //const time = (new Date()).toTimeString();
             //core.setOutput("time", time);
             //// Get the JSON webhook payload for the event that triggered the workflow
-            //const payload = JSON.stringify(github.context.payload, undefined, 2)
-            //console.log(`The event payload: ${payload}`);
+            const payload = JSON.stringify(github.context.payload, undefined, 2)
+            console.log(`The event payload: ${payload}`);
 
         } catch (error) {
             core.setFailed(error.message)
