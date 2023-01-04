@@ -117,6 +117,7 @@ const makeGithubUrl = (url, username, token) => {
 
             if (shell.which('docker-compose')) {
                 shell.echo('Docker Compose is installed');
+                shell.exec('docker-compose -v .')
             } else {
                 shell.echo('Docker Compose is not installed');
             }
