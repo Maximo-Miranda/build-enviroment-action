@@ -28,6 +28,18 @@ const checkExistPath = async (path) => {
     }
 }
 
+// createDirectory ...
+const createDirectory = async (path) => {
+    try{
+
+        const pathCreated = await fs.promises.mkdir(path, { recursive: true })
+        return pathCreated
+
+    } catch (error){
+        throw error
+    }
+}
+
 // openJsonFile ...
 const openJsonFile = (filePath) => {
     try {
@@ -39,11 +51,11 @@ const openJsonFile = (filePath) => {
 }
 
 // cloneRepository ...
-const cloneRepository = (url, branch, name) => {
+const cloneRepository = (url, branch, name, path) => {
     try {
         //console.log(shell.pwd())
-        console.log("=> init clone repository", url, branch)
-        const response = shell.exec(`git clone ${url} ${name} -b ${branch}`)
+        console.log("=> init clone repository", url, branch, path)
+        const response = shell.exec(`git clone ${url} ${path}/${name} -b ${branch}`)
         if (response.code !== 0) {
             throw new Error(`${response.stderr.replaceAll('\n', '')}`)
         }
@@ -105,11 +117,16 @@ const makeGithubUrl = (url, username, token) => {
 
             console.log("obj", repositories)
 
+            const githubActionTmpServices = `${__dirname}/github_action_tmp_services`
+
+            await createDirectory(githubActionTmpServices)
+
             for (const repository of repositories) {
-                const url = makeGithubUrl(repository.url, USERNAME, GITHUB_TOKEN)                
-                cloneRepository(url, repository.branch, repository.name)
+                const url = makeGithubUrl(repository.url, USERNAME, GITHUB_TOKEN)
+                cloneRepository(url, repository.branch, repository.name, githubActionTmpServices)
             }
 
+            shell.ls('-R', githubActionTmpServices)
 
             if (shell.which('docker-compose')) {
                 shell.echo('Docker Compose is installed');
