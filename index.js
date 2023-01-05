@@ -84,6 +84,7 @@ const makeGithubUrl = (url, username, token) => {
             const GITHUB_TOKEN = process.env.PERSONAL_TOKEN
             const DEUNA_ACTION_ENVIRONMENT = process.env.DEUNA_ACTION_ENVIRONMENT
             //let USERNAME = payload.head_commit.author.username
+            console.log("payload", payload)
             let USERNAME = "Maximo-Miranda"
 
             core.notice('=> Calling Deuna Test Enviroment Action')
