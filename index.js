@@ -187,7 +187,7 @@ const makeGithubUrl = (url, username, token) => {
             }).on('start', function (err, args) { // on start of run, log to console
                 console.log('running a collection...');
             }).on('exception', function (err) {
-                console.log("EXCEPTION =>", err)
+                console.log("newman exception =>", err)
             }).on('done', function (err, summary) {
                 //console.log("ERROR, SUMMARY =>", err, summary)
                 const corp = openJsonFile(`${__dirname}/newman/Deuna-Dev.postman_collection_reporter.json`)

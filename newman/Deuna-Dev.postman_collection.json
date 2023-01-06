@@ -14,7 +14,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"    pm.expect(pm.response.code).to.eql(200);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -28,7 +28,7 @@
 					"raw": "http://localhost:8080/ping",
 					"protocol": "http",
 					"host": [
-						"api"
+						"localhost"
 					],
 					"port": "8080",
 					"path": [
