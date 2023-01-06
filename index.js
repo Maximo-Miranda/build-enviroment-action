@@ -189,7 +189,8 @@ const makeGithubUrl = (url, username, token) => {
             }).on('exception', function (err) {
                 console.log("EXCEPTION =>", err)
             }).on('done', function (err, summary) {
-                console.log("ERROR, SUMMARY =>", err, summary)
+                //console.log("ERROR, SUMMARY =>", err, summary)
+                console.log("LS =>",shell.exec(`ls ${__dirname}/newman`))
                 if (err || summary.error) {
                     console.error('collection run encountered an error.');
                 }
@@ -197,8 +198,6 @@ const makeGithubUrl = (url, username, token) => {
                     console.log('collection run completed.');
                 }
             })
-
-            shell.exec(`ls ${__dirname}/newman`)
 
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
