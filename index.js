@@ -189,11 +189,15 @@ const makeGithubUrl = (url, username, token) => {
             }).on('exception', function (err) {
                 console.log("newman exception =>", err)
             }).on('done', function (err, summary) {
-                //console.log("ERROR, SUMMARY =>", err, summary)
-                const corp = openJsonFile(`${__dirname}/newman/Deuna-Dev.postman_collection_reporter.json`)
-                console.log("CORP", corp)
-                console.log("CORP 1", corp.run.stats.assertions)
-                console.log("CORP 2", corp.run.failures)
+                const tmpReport = openJsonFile(`${__dirname}/newman/Deuna-Dev.postman_collection_reporter.json`)
+                if(tmpReport.run.stats.assertions.failed > 0){
+                    if(tmpReport.run.failures.length > 0){
+                        throw new Error('Test failed')
+                    }
+                }
+                //console.log("CORP", corp)
+                //console.log("CORP 1", corp.run.stats.assertions)
+                //console.log("CORP 2", corp.run.failures)
                 if (err || summary.error) {
                     console.error('collection run encountered an error.');
                 }
