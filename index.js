@@ -4,6 +4,7 @@ const fs = require('fs')
 const _ = require('lodash')
 const shell = require('shelljs')
 const GitUrlParse = require("git-url-parse");
+const fetch = require('node-fetch');
 
 // checkFileExist ...
 const checkFileExist = async (filePath) => {
@@ -137,7 +138,7 @@ const makeGithubUrl = (url, username, token) => {
 
             const response = await fetch('https://localhost:8000')
 
-            console.log("response", response)
+            console.log("response", response.text())
 
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');

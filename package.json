@@ -23,6 +23,7 @@
     "git-url-parse": "^13.1.0",
     "install": "^0.13.0",
     "lodash": "^4.17.21",
+    "node-fetch": "^3.3.0",
     "npm": "^9.2.0",
     "shelljs": "^0.8.5"
   }
