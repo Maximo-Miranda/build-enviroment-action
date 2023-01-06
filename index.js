@@ -145,20 +145,22 @@ const makeGithubUrl = (url, username, token) => {
             //    console.log(error);
             //})
 
-            newman.run({
-                collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
-                reporters: 'cli'
-            }, function (err, summary) {
-                console.log("err", err, summary)
-                if (err) { throw err; }
-                console.log('collection run complete!');
-            });
+            //newman.run({
+            //    collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
+            //    reporters: 'cli'
+            //}, function (err, summary) {
+            //    console.log("err", err, summary)
+            //    if (err) { throw err; }
+            //    console.log('collection run complete!');
+            //});
 
-           /*  newman.run({
+            newman.run({
                 collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
                 reporters: 'json'
             }).on('start', function (err, args) { // on start of run, log to console
                 console.log('running a collection...');
+            }).on('exception', function (err) {
+                console.log("EXCEPTION =>", err)
             }).on('done', function (err, summary) {
                 console.log("ERROR, SUMMARY =>", err, summary)
                 if (err || summary.error) {
@@ -167,8 +169,7 @@ const makeGithubUrl = (url, username, token) => {
                 else {
                     console.log('collection run completed.');
                 }
-            }); */
-
+            })
 
 
             // `who-to-greet` input defined in action metadata file
