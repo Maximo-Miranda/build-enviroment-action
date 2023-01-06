@@ -151,6 +151,7 @@ const makeGithubUrl = (url, username, token) => {
             }).on('start', function (err, args) { // on start of run, log to console
                 console.log('running a collection...');
             }).on('done', function (err, summary) {
+                console.log("ERROR, SUMMARY =>", err, summary)
                 if (err || summary.error) {
                     console.error('collection run encountered an error.');
                 }
