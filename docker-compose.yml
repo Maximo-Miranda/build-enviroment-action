@@ -28,18 +28,6 @@ services:
       - duna-dev-net
     depends_on:
       - postgres
-      - database
-  
-  database:
-    volumes:
-      - ./storage:/app
-    build:
-      context: ./
-      dockerfile: ./database/Dockerfile
-    networks:
-      - duna-dev-net
-    depends_on:
-      - postgres
   
   redis:
     image: redis:6.2.5-alpine
