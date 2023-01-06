@@ -4,7 +4,7 @@ const fs = require('fs')
 const _ = require('lodash')
 const shell = require('shelljs')
 const GitUrlParse = require("git-url-parse");
-const fetch = require('node-fetch');
+const axios = require('axios').default;
 
 // checkFileExist ...
 const checkFileExist = async (filePath) => {
@@ -31,12 +31,12 @@ const checkExistPath = async (path) => {
 
 // createDirectory ...
 const createDirectory = async (path) => {
-    try{
+    try {
 
         const pathCreated = await fs.promises.mkdir(path, { recursive: true })
         return pathCreated
 
-    } catch (error){
+    } catch (error) {
         throw error
     }
 }
@@ -112,7 +112,7 @@ const makeGithubUrl = (url, username, token) => {
 
             const repositories = mergeJsonArrayByKeyCondition(localRepositoriesConfigData, currentRepositoriesConfigData)
 
-            if(repositories.length === 0) {
+            if (repositories.length === 0) {
                 throw new Error('No repositories to clone')
             }
 
@@ -136,9 +136,15 @@ const makeGithubUrl = (url, username, token) => {
                 shell.echo('Docker Compose is not installed');
             }
 
-            const response = await fetch('https://localhost:8000')
+            axios('https://localhost:8000').then(function (response) {
+                // handle success
+                console.log(response);
+            }).catch(function (error) {
+                // handle error
+                console.log(error);
+            })
 
-            console.log("response", response.text())
+
 
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
@@ -146,7 +152,7 @@ const makeGithubUrl = (url, username, token) => {
             //const time = (new Date()).toTimeString();
             //core.setOutput("time", time);
             //// Get the JSON webhook payload for the event that triggered the workflow
-            
+
 
         } catch (error) {
             core.setFailed(error.message)
