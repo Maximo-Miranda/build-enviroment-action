@@ -192,7 +192,7 @@ const makeGithubUrl = (url, username, token) => {
                 const tmpReport = openJsonFile(`${__dirname}/newman/Deuna-Dev.postman_collection_reporter.json`)
                 if(tmpReport.run.stats.assertions.failed > 0){
                     if(tmpReport.run.failures.length > 0){
-                        throw 'Test failed'
+                        core.setFailed('newman test failed')
                     }
                 }
                 //console.log("CORP", corp)
