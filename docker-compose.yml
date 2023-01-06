@@ -1,7 +1,60 @@
-version: "3"
+version: '3.5'
 
 services:
-    client:
-        image: nginx
-        ports:
-            - 8001:80
+  postgres:
+    image: postgres:14.0-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: deuna
+    volumes:
+      - ./storage/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - duna-dev-net
+
+  api:
+    volumes:
+      - ./storage:/app
+    build:
+      context: ./
+      dockerfile: ./tmp_test/api/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - duna-dev-net
+    depends_on:
+      - postgres
+      - database
+  
+  database:
+    volumes:
+      - ./storage:/app
+    build:
+      context: ./
+      dockerfile: ./database/Dockerfile
+    networks:
+      - duna-dev-net
+    depends_on:
+      - postgres
+  
+  redis:
+    image: redis:6.2.5-alpine
+    container_name: redis
+    restart: always
+    volumes:
+      - ./storage/redis:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - duna-dev-net
+
+volumes:
+  deuna-dev:
+
+networks:
+  duna-dev-net:
+    name: duna-dev-net

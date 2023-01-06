@@ -5,6 +5,7 @@ const _ = require('lodash')
 const shell = require('shelljs')
 const GitUrlParse = require("git-url-parse");
 const axios = require('axios').default;
+const newman = require('newman');
 
 // checkFileExist ...
 const checkFileExist = async (filePath) => {
@@ -136,13 +137,21 @@ const makeGithubUrl = (url, username, token) => {
                 shell.echo('Docker Compose is not installed');
             }
 
-            axios('http://localhost:8001').then(function (response) {
-                // handle success
-                console.log(response);
-            }).catch(function (error) {
-                // handle error
-                console.log(error);
-            })
+            //axios('http://localhost:8001').then(function (response) {
+            //    // handle success
+            //    console.log(response);
+            //}).catch(function (error) {
+            //    // handle error
+            //    console.log(error);
+            //})
+
+            newman.run({
+                collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
+                reporters: 'cli'
+            }, function (err) {
+                if (err) { throw err; }
+                console.log('collection run complete!');
+            });
 
 
 

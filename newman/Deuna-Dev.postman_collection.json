@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "a573a3e1-91e5-45a2-b1a3-7c5d1627ab57",
+		"name": "Deuna-Dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23793745"
+	},
+	"item": [
+		{
+			"name": "Ping-Pong",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ping",
+					"protocol": "http",
+					"host": [
+						"api"
+					],
+					"port": "8080",
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
