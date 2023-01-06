@@ -97,7 +97,7 @@ const makeGithubUrl = (url, username, token) => {
             const GITHUB_TOKEN = process.env.PERSONAL_TOKEN
             const DEUNA_ACTION_ENVIRONMENT = process.env.DEUNA_ACTION_ENVIRONMENT
             //let USERNAME = payload.head_commit.author.username
-            console.log("payload", payload)
+            //console.log("payload", payload)
             let USERNAME = "Maximo-Miranda"
 
             core.notice('=> Calling Deuna Test Enviroment Action')
@@ -136,7 +136,7 @@ const makeGithubUrl = (url, username, token) => {
                 shell.echo('Docker Compose is not installed');
             }
 
-            axios('https://localhost:8000').then(function (response) {
+            axios('http://localhost:8001').then(function (response) {
                 // handle success
                 console.log(response);
             }).catch(function (error) {
