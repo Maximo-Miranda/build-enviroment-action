@@ -28,7 +28,7 @@
 					"raw": "http://localhost:8080/ping",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"api"
 					],
 					"port": "8080",
 					"path": [
