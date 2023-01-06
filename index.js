@@ -190,7 +190,9 @@ const makeGithubUrl = (url, username, token) => {
                 console.log("EXCEPTION =>", err)
             }).on('done', function (err, summary) {
                 //console.log("ERROR, SUMMARY =>", err, summary)
-                console.log(openJsonFile(`${__dirname}/newman/Deuna-Dev.postman_collection_reporter.json`))
+                const corp = openJsonFile(`${__dirname}/newman/Deuna-Dev.postman_collection_reporter.json`)
+                console.log("CORP 1", corp.run.stats.assertions)
+                console.log("CORP 2", corp.run.failures)
                 if (err || summary.error) {
                     console.error('collection run encountered an error.');
                 }
