@@ -2,8 +2,8 @@ FROM golang:1.19-buster AS build
 
 WORKDIR /app
 
-COPY ./api/go.mod ./
-COPY ./api/go.sum ./
+COPY ./go.mod ./
+COPY ./go.sum ./
 RUN go mod download
 
 COPY ./api/*.go ./
