@@ -172,6 +172,7 @@ const makeGithubUrl = (url, username, token) => {
                     }
                 },
                 function(err) {
+                    console.log("err", err)
                     if (err) {
                         throw err;
                     }
@@ -179,7 +180,7 @@ const makeGithubUrl = (url, username, token) => {
                 }
             );
 
-            newman.run({
+            /* newman.run({
                 collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
                 reporters: 'json'
             }).on('start', function (err, args) { // on start of run, log to console
@@ -194,7 +195,7 @@ const makeGithubUrl = (url, username, token) => {
                 else {
                     console.log('collection run completed.');
                 }
-            })
+            }) */
 
 
             // `who-to-greet` input defined in action metadata file
