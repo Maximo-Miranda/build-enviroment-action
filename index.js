@@ -147,7 +147,7 @@ const makeGithubUrl = (url, username, token) => {
 
             newman.run({
                 collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
-                //reporters: 'cli'
+                reporters: 'json'
             }).on('start', function (err, args) { // on start of run, log to console
                 console.log('running a collection...');
             }).on('done', function (err, summary) {
