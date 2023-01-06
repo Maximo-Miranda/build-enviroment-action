@@ -162,8 +162,8 @@ const makeGithubUrl = (url, username, token) => {
                         "@reportportal/agent-js-postman": {
                             endpoint: "http://api:8080/ping",
                             token: "00000000-0000-0000-0000-000000000000",
-                            launch: "LAUNCH_NAME",
-                            project: "PROJECT_NAME",
+                            //launch: "LAUNCH_NAME",
+                            //project: "PROJECT_NAME",
                             description: "LAUNCH_DESCRIPTION",
                             attributes: [],
                             mode: 'DEFAULT',
