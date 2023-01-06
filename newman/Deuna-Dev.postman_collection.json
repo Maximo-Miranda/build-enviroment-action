@@ -14,7 +14,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
-							"    pm.expect(pm.response.code).to.eql(200);",
+							"    pm.expect(pm.response.code).to.eql(201);",
 							"});"
 						],
 						"type": "text/javascript"
