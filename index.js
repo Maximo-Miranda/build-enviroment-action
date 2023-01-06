@@ -101,7 +101,7 @@ const makeGithubUrl = (url, username, token) => {
             //console.log("payload", payload)
             let USERNAME = "Maximo-Miranda"
 
-            core.notice('=> Calling Deuna Test Enviroment Action')
+            core.notice('=> Calling Deuna Test Enviroment Action - NEW')
 
             const requireConfigFilesData = openJsonFile(`${__dirname}/config/files.json`)
             for (const file of requireConfigFilesData) {
@@ -182,7 +182,7 @@ const makeGithubUrl = (url, username, token) => {
 
             newman.run({
                 collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
-                reporters: ['json', 'cli'],
+                reporters: 'json',
                 reporter: { json: { export : `${__dirname}/newman/Deuna-Dev.postman_collection_reporter.json`}},
             }).on('start', function (err, args) { // on start of run, log to console
                 console.log('running a collection...');
@@ -191,6 +191,7 @@ const makeGithubUrl = (url, username, token) => {
             }).on('done', function (err, summary) {
                 //console.log("ERROR, SUMMARY =>", err, summary)
                 const corp = openJsonFile(`${__dirname}/newman/Deuna-Dev.postman_collection_reporter.json`)
+                console.log("CORP", corp)
                 console.log("CORP 1", corp.run.stats.assertions)
                 console.log("CORP 2", corp.run.failures)
                 if (err || summary.error) {
