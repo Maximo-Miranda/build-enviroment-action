@@ -154,31 +154,31 @@ const makeGithubUrl = (url, username, token) => {
             //    console.log('collection run complete!');
             //});
 
-            newman.run(
-                {
-                    collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
-                    reporters: "@reportportal/agent-js-postman",
-                    reporter: {
-                        "@reportportal/agent-js-postman": {
-                            endpoint: "http://api:8080/ping",
-                            token: "00000000-0000-0000-0000-000000000000",
-                            //launch: "LAUNCH_NAME",
-                            //project: "PROJECT_NAME",
-                            description: "LAUNCH_DESCRIPTION",
-                            attributes: [],
-                            mode: 'DEFAULT',
-                            debug: true
-                        }
-                    }
-                },
-                function(err) {
-                    console.log("err", err)
-                    if (err) {
-                        throw err;
-                    }
-                    console.log("collection run complete!");
-                }
-            );
+            //newman.run(
+            //    {
+            //        collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
+            //        reporters: "@reportportal/agent-js-postman",
+            //        reporter: {
+            //            "@reportportal/agent-js-postman": {
+            //                endpoint: "http://api:8080/ping",
+            //                token: "00000000-0000-0000-0000-000000000000",
+            //                //launch: "LAUNCH_NAME",
+            //                //project: "PROJECT_NAME",
+            //                description: "LAUNCH_DESCRIPTION",
+            //                attributes: [],
+            //                mode: 'DEFAULT',
+            //                debug: true
+            //            }
+            //        }
+            //    },
+            //    function(err) {
+            //        console.log("err", err)
+            //        if (err) {
+            //            throw err;
+            //        }
+            //        console.log("collection run complete!");
+            //    }
+            //);
 
             newman.run({
                 collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
