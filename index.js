@@ -147,6 +147,15 @@ const makeGithubUrl = (url, username, token) => {
 
             newman.run({
                 collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
+                reporters: 'cli,json'
+            }, function (err) {
+                console.log("err", err)
+                if (err) { throw err; }
+                console.log('collection run complete!');
+            });
+
+           /*  newman.run({
+                collection: require(`${__dirname}/newman/Deuna-Dev.postman_collection.json`),
                 reporters: 'json'
             }).on('start', function (err, args) { // on start of run, log to console
                 console.log('running a collection...');
@@ -158,7 +167,7 @@ const makeGithubUrl = (url, username, token) => {
                 else {
                     console.log('collection run completed.');
                 }
-            });
+            }); */
 
 
 
