@@ -130,10 +130,14 @@ const makeGithubUrl = (url, username, token) => {
 
             if (shell.which('docker-compose')) {
                 shell.echo('Docker Compose is installed');
-                shell.exec('docker-compose -v .')
+                shell.exec('docker-compose up -d')
             } else {
                 shell.echo('Docker Compose is not installed');
             }
+
+            const response = await fetch('https://localhost:8000')
+
+            console.log("response", response)
 
             // `who-to-greet` input defined in action metadata file
             //const nameToGreet = core.getInput('who-to-greet');
